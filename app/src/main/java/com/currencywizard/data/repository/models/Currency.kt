@@ -1,4 +1,4 @@
-package com.currencywizard.data.models
+package com.currencywizard.data.repository.models
 
 data class Currency(
     val symbol: String,

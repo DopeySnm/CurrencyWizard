@@ -2,6 +2,7 @@ package com.currencywizard.data.api
 
 import com.currencywizard.data.api.models.CurrencyRelationsResponse
 import com.currencywizard.data.api.models.HistoryCurrencyRelationsResponse
+import com.currencywizard.data.repository.models.Currency
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -16,7 +17,7 @@ interface ConvertorService {
     ): Response<CurrencyRelationsResponse>
 
     @GET("currencies")
-    fun getCurrencies(): Response<List<Map<String, String>>> //symbol - name
+    fun getCurrencies(): Response<Map<String, String>> //symbol - name
 
     @GET("{startDate}..{endDate}")
     fun getHistoryCurrencyRelations(
