@@ -2,8 +2,8 @@ package com.currencywizard.di.modules
 
 import android.content.Context
 import androidx.room.Room
-import com.currencywizard.data.db.CurrencyDao
-import com.currencywizard.data.db.CurrencyDatabase
+import com.currencywizard.data.db.RateDao
+import com.currencywizard.data.db.RateDatabase
 import dagger.Module
 import dagger.Provides
 
@@ -11,16 +11,16 @@ import dagger.Provides
 class DatabaseModule {
 
     @Provides
-    fun provideDatabase(context: Context): CurrencyDatabase =
+    fun provideDatabase(context: Context): RateDatabase =
         Room.databaseBuilder(
             context,
-            CurrencyDatabase::class.java,
+            RateDatabase::class.java,
             "currency.db"
         ).build()
 
 
     @Provides
-    fun provideCurrencyDao(db: CurrencyDatabase): CurrencyDao {
+    fun provideCurrencyDao(db: RateDatabase): RateDao {
         return db.currencyDao()
     }
 }
