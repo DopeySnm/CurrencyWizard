@@ -6,10 +6,9 @@ import com.currencywizard.data.db.models.RateEntity
 
 @Database(
     entities = [
-        RateEntity::class,
+        RateEntity::class
     ],
-    version = 1,
-    exportSchema = false
+    version = 1
 )
 abstract class RateDatabase : RoomDatabase() {
     abstract fun currencyDao(): RateDao

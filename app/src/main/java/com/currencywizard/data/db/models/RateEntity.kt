@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.currencywizard.data.db.RateSource
+import com.currencywizard.data.modules.Rate
 
 @Entity(
     tableName = "rates"
@@ -18,4 +19,9 @@ data class RateEntity(
     val date: String,
     val coefficient: Double,
     val source: RateSource = RateSource.TRANSFER
-)
+) {
+    fun toRate(): Rate =
+        Rate(
+            id, base, target, date, coefficient
+        )
+}

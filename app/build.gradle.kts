@@ -3,7 +3,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs")
     id("kotlin-kapt")
-    id("com.google.devtools.ksp")
 }
 
 android {
@@ -13,7 +12,7 @@ android {
     defaultConfig {
         applicationId = "com.currencywizard"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
