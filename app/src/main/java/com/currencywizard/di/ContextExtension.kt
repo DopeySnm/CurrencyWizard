@@ -1,7 +1,7 @@
 package com.currencywizard.di
 
 import android.content.Context
-import com.currencywizard.presenter.MainApp
+import com.currencywizard.MainApp
 
 val Context.appComponent: AppComponent
     get() = when(this){
