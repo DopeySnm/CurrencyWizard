@@ -2,7 +2,6 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs")
-
     id("kotlin-kapt")
 }
 
@@ -74,4 +73,5 @@ dependencies {
     val roomVersion = "2.5.0"
     implementation("androidx.room:room-ktx:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
+
 }
