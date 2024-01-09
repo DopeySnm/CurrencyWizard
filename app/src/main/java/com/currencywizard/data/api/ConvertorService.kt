@@ -16,7 +16,7 @@ interface ConvertorService {
     ): Response<CurrencyRelationsResponse>
 
     @GET("currencies")
-    fun getCurrencies(): Response<List<Map<String, String>>> //symbol - name
+    fun getCurrencies(): Response<Map<String, String>> //symbol - name
 
     @GET("{startDate}..{endDate}")
     fun getHistoryCurrencyRelations(
