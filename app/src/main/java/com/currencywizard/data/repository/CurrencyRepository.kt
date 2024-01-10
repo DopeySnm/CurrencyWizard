@@ -38,7 +38,7 @@ class CurrencyRepositoryImpl @Inject constructor(
         currencyTo: String
     ): DataState<Rate> {
         kotlin.runCatching {
-            service.getCurrencyRelations(currencyForm, currencyTo)
+            service.getCurrencyRelations(currencyForm, currencyTo, amount)
         }.fold(
             onSuccess = {
                 return if(it.isSuccessful) {

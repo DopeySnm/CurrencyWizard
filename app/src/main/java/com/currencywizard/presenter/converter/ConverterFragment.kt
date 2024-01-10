@@ -17,6 +17,7 @@ import com.currencywizard.databinding.FragmentConverterBinding
 import com.currencywizard.di.appComponent
 import com.currencywizard.di.viewModel.ViewModelFactory
 import javax.inject.Inject
+import kotlin.math.roundToLong
 
 class ConverterFragment  : Fragment(R.layout.fragment_converter) {
 
@@ -26,8 +27,6 @@ class ConverterFragment  : Fragment(R.layout.fragment_converter) {
     lateinit var viewModelFactory: ViewModelFactory
 
     private val viewModel: ConverterViewModel by viewModels { viewModelFactory }
-
-    private var baseValue: Double = 0.0
 
 
     override fun onAttach(context: Context) {
@@ -85,7 +84,9 @@ class ConverterFragment  : Fragment(R.layout.fragment_converter) {
 
     private fun initializeTarget(state: UiState<Rate>){
         when(state){
-            is UiState.Success -> binding.targetCurrencyTextView.text = (baseValue * state.value.coefficient).toString()
+            is UiState.Success -> binding.targetCurrencyTextView.text = (
+                    ((state.value.coefficient * 100.0).roundToLong()) / 100.0)
+                .toString()
             is UiState.Failure -> binding.targetCurrencyTextView.text = "failed"
             is UiState.Loading -> binding.targetCurrencyTextView.text = "0"
         }
@@ -99,11 +100,13 @@ class ConverterFragment  : Fragment(R.layout.fragment_converter) {
     }
 
     private fun onEnterClick(){
-        viewModel.loadRate("EUR","USD")
-
+        viewModel.loadRate(
+            binding.baseCurrencyDropdown.text.toString(),
+            binding.targetCurrencyDropdown.text.toString())
     }
     private fun onClearClick(){
         viewModel.resetBase()
+        viewModel.resetTarget()
     }
     private fun onGraphClick(){
 
@@ -112,6 +115,8 @@ class ConverterFragment  : Fragment(R.layout.fragment_converter) {
 
     }
     private fun onSwitchClick(){
+
+
 
     }
 
