@@ -2,6 +2,7 @@ package com.currencywizard.presenter.converter
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Message
 import android.view.View
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
@@ -9,6 +10,9 @@ import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.currencywizard.R
 import com.currencywizard.data.modules.Currency
+import com.currencywizard.data.modules.Rate
+import com.currencywizard.data.states.DataState
+import com.currencywizard.data.states.UiState
 import com.currencywizard.databinding.FragmentConverterBinding
 import com.currencywizard.di.appComponent
 import com.currencywizard.di.viewModel.ViewModelFactory
@@ -23,7 +27,7 @@ class ConverterFragment  : Fragment(R.layout.fragment_converter) {
 
     private val viewModel: ConverterViewModel by viewModels { viewModelFactory }
 
-    private var baseValue: Long = 0
+    private var baseValue: Double = 0.0
 
 
     override fun onAttach(context: Context) {
@@ -34,10 +38,21 @@ class ConverterFragment  : Fragment(R.layout.fragment_converter) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.currencies.observe(viewLifecycleOwner){
-            initializeSpinners(it)
+            when(it){
+                is UiState.Success -> initializeSpinners(it.value)
+                is UiState.Failure -> initializeSpinners(listOf())
+                is UiState.Loading -> initializeSpinners(listOf())
+            }
+        }
+        viewModel.rate.observe(viewLifecycleOwner){
+            initializeTarget(it)
+        }
+        viewModel.baseValue.observe(viewLifecycleOwner){
+            initializeBase(it)
         }
         initializeKeyboard()
         viewModel.loadCurrencies()
+
     }
 
     private fun initializeSpinners(currencies: List<Currency>){
@@ -67,17 +82,28 @@ class ConverterFragment  : Fragment(R.layout.fragment_converter) {
         binding.btnEqual.setOnClickListener{ onEnterClick() }
     }
 
-    private fun onDigitClick(digit:Int){
-        baseValue = baseValue * 10 + digit
-        binding.baseCurrencyTextView.text = baseValue.toString()
+
+    private fun initializeTarget(state: UiState<Rate>){
+        when(state){
+            is UiState.Success -> binding.targetCurrencyTextView.text = (baseValue * state.value.coefficient).toString()
+            is UiState.Failure -> binding.targetCurrencyTextView.text = "failed"
+            is UiState.Loading -> binding.targetCurrencyTextView.text = "0"
+        }
+    }
+    private fun initializeBase(value: Double){
+        binding.baseCurrencyTextView.text = value.toInt().toString()
+    }
+
+    private fun onDigitClick(digit : Byte){
+        viewModel.addDigitToBase(digit)
     }
 
     private fun onEnterClick(){
+        viewModel.loadRate("EUR","USD")
 
     }
     private fun onClearClick(){
-        baseValue = 0
-        binding.baseCurrencyTextView.text = baseValue.toString()
+        viewModel.resetBase()
     }
     private fun onGraphClick(){
 

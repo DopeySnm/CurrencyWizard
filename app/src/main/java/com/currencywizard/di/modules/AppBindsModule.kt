@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.Context
 import com.currencywizard.data.repository.CurrencyRepository
 import com.currencywizard.data.repository.CurrencyRepositoryImpl
+import com.currencywizard.domain.ConvertCurrencyUseCase
+import com.currencywizard.domain.ConvertCurrencyUseCaseImpl
 import com.currencywizard.domain.GetCurrenciesUseCase
 import com.currencywizard.domain.GetCurrenciesUseCaseImpl
 import com.currencywizard.domain.GetCurrencyHistoryRelationOverFiveYearsUseCase
@@ -40,6 +42,9 @@ interface AppBindsModule {
 
     @Binds
     fun bindGetCurrenciesUseCase(useCase: GetCurrenciesUseCaseImpl): GetCurrenciesUseCase
+
+    @Binds
+    fun bindConvertCurrencyUseCase(useCase: ConvertCurrencyUseCaseImpl) : ConvertCurrencyUseCase
 
     @Binds
     fun bindCurrencyRepository(repository: CurrencyRepositoryImpl) : CurrencyRepository
