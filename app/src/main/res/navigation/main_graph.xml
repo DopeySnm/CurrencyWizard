@@ -9,5 +9,21 @@
         android:id="@+id/converterFragment"
         android:name="com.currencywizard.presenter.converter.ConverterFragment"
         android:label="fragment_converter"
-        tools:layout="@layout/fragment_converter" />
+        tools:layout="@layout/fragment_converter" >
+        <action
+            android:id="@+id/action_converterFragment_to_historyRelationFragment"
+            app:destination="@id/historyRelationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/historyRelationFragment"
+        android:name="com.currencywizard.presenter.historyRelation.HistoryRelationFragment"
+        android:label="fragment_history_relation"
+        tools:layout="@layout/fragment_history_relation" >
+        <argument
+            android:name="from"
+            app:argType="string" />
+        <argument
+            android:name="to"
+            app:argType="string" />
+    </fragment>
 </navigation>

@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.currencywizard.R
 import com.currencywizard.data.modules.Currency
@@ -109,7 +110,15 @@ class ConverterFragment  : Fragment(R.layout.fragment_converter) {
         viewModel.resetTarget()
     }
     private fun onGraphClick(){
-
+        if (binding.baseCurrencyDropdown.text.toString() != "" &&
+            binding.targetCurrencyDropdown.text.toString() != ""
+            ) {
+            val action = ConverterFragmentDirections.actionConverterFragmentToHistoryRelationFragment(
+                binding.baseCurrencyDropdown.text.toString(),
+                binding.targetCurrencyDropdown.text.toString()
+            )
+            Navigation.findNavController(requireView()).navigate(action)
+        }
     }
     private fun onHistoryClick(){
 

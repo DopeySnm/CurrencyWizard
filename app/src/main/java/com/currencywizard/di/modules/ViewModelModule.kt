@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.currencywizard.di.viewModel.ViewModelFactory
 import com.currencywizard.di.viewModel.ViewModelKey
 import com.currencywizard.presenter.converter.ConverterViewModel
+import com.currencywizard.presenter.historyRelation.HistoryRelationViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -19,4 +20,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ConverterViewModel::class)
     abstract fun bindConverterViewModel(viewModel: ConverterViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HistoryRelationViewModel::class)
+    abstract fun bindHistoryRelationViewModel(viewModel: HistoryRelationViewModel): ViewModel
+
 }

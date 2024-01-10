@@ -2,6 +2,7 @@ package com.currencywizard.di
 
 import android.app.Application
 import com.currencywizard.presenter.converter.ConverterFragment
+import com.currencywizard.presenter.historyRelation.HistoryRelationFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -13,6 +14,8 @@ import javax.inject.Singleton
 )
 interface AppComponent {
     fun inject(fragment: ConverterFragment)
+
+    fun inject(fragment: HistoryRelationFragment)
 
     @Component.Builder
     interface Builder{

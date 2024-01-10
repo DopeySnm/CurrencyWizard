@@ -13,7 +13,7 @@ enum class PeriodsTime(val value: Int, val period: Int) {
 class DateHelper {
 
     companion object {
-        private val formatter = SimpleDateFormat("YYYY-MM-DD")
+        private val formatter = SimpleDateFormat("yyyy-MM-dd")
 
         fun getCurrentDateInFormatted(): String {
             val time = Calendar.getInstance().time
