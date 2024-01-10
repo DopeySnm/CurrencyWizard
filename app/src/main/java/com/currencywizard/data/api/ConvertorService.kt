@@ -10,16 +10,17 @@ import retrofit2.http.Query
 interface ConvertorService {
 
     @GET("latest")
-    fun getCurrencyRelations(
+    suspend fun getCurrencyRelations(
         @Query("from") from: String,
-        @Query("to") to: String
+        @Query("to") to: String,
+        @Query("amount") amount: Double
     ): Response<CurrencyRelationsResponse>
 
     @GET("currencies")
-    fun getCurrencies(): Response<Map<String, String>> //symbol - name
+    suspend fun getCurrencies(): Response<Map<String, String>> //symbol - name
 
     @GET("{startDate}..{endDate}")
-    fun getHistoryCurrencyRelations(
+    suspend fun getHistoryCurrencyRelations(
         @Path("startDate") startDate: String, //example format date 2020-01-01
         @Path("endDate") endDate: String,
         @Query("from") from: String,

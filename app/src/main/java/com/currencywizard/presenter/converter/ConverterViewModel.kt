@@ -12,6 +12,7 @@ import com.currencywizard.domain.ConvertCurrencyUseCase
 import com.currencywizard.domain.GetCurrenciesUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.math.roundToLong
 
 class ConverterViewModel
 @Inject constructor(
@@ -46,10 +47,14 @@ class ConverterViewModel
         }
     }
 
+
     fun addDigitToBase(digit: Byte){
         _baseValue.postValue((baseValue.value!!.times(10)).plus(digit))
     }
     fun resetBase(){
         _baseValue.postValue(0.0)
+    }
+    fun resetTarget(){
+        _rate.postValue(UiState.Loading)
     }
 }
