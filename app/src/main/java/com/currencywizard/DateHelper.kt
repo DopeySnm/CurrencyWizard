@@ -16,7 +16,7 @@ enum class PeriodsTime(val value: Int, val period: Int) {
 class DateHelper {
 
     companion object {
-        private val formatter = SimpleDateFormat("yyyy-MM-dd")
+        val formatter = SimpleDateFormat("yyyy-MM-dd")
 
         fun getCurrentDateInFormatted(): String {
             val time = Calendar.getInstance().time
@@ -35,6 +35,4 @@ class DateHelper {
             return date?.time?.toFloat() ?: 0f
         }
     }
-
-    val dateFormatter = SimpleDateFormat("MM-dd-yyyy")
 }

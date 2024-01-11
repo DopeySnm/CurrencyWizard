@@ -35,8 +35,6 @@ class CurrencyRepositoryImpl @Inject constructor(
     private val service: ConvertorService,
     private val dao: RateDao
 ) : CurrencyRepository {
-
-    val helper = DateHelper()
     override suspend fun convertCurrency(
         amount: Double,
         currencyForm: String,
@@ -137,22 +135,23 @@ class CurrencyRepositoryImpl @Inject constructor(
     }
 
     private fun orderByDate(rates: List<Rate>): List<Rate> {
-        return rates.sortedBy { helper.dateFormatter.parse(it.date) }
+        return rates.sortedBy { DateHelper.formatter.parse(it.date) }
     }
 
     private fun filterByDate(rates: List<Rate>, startDate: String, endDate: String): List<Rate> {
         return rates.filter {
-            helper.dateFormatter.parse(it.date)!! >= helper.dateFormatter.parse(startDate)
-                    && helper.dateFormatter.parse(it.date)!! <= helper.dateFormatter.parse(endDate)
+            DateHelper.formatter.parse(it.date)!! >= DateHelper.formatter.parse(startDate)
+                    && DateHelper.formatter.parse(it.date)!! <= DateHelper.formatter.parse(endDate)
         }
     }
 
     private fun cacheValidate(rates: List<Rate>, startDate: String, endDate: String): Boolean {
-        val nextUpdate = getDateWeeksLater(helper.dateFormatter.parse(rates.last().date)!!)
-        return helper.dateFormatter.parse(rates.first().date)!! <= helper.dateFormatter.parse(
+        if (rates.isEmpty()) return false
+        val nextUpdate = getDateWeeksLater(DateHelper.formatter.parse(rates.last().date)!!)
+        return DateHelper.formatter.parse(rates.first().date)!! <= DateHelper.formatter.parse(
             startDate
         )
-                && nextUpdate >= helper.dateFormatter.parse(endDate)
+                && nextUpdate >= DateHelper.formatter.parse(endDate)
     }
 
     private fun getDateWeeksLater(date: Date): Date {

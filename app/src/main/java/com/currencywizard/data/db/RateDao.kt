@@ -17,15 +17,15 @@ interface RateDao {
     suspend fun saveAll(rates: List<RateEntity>)
 
     @Query("SELECT * FROM rates WHERE source = 'TRANSFER'")
-    fun getTransferHistory() : List<RateEntity>
+    suspend fun getTransferHistory() : List<RateEntity>
 
     @Query("SELECT * FROM rates WHERE source = 'HISTORY' " +
             "AND base = :base " +
             "AND target = :target")
-    fun getRelationHistory(base:String, target: String) : List<RateEntity>
+    suspend fun getRelationHistory(base:String, target: String) : List<RateEntity>
 
     @Query("DELETE FROM rates WHERE source = 'HISTORY' AND base = :base AND target = :target ")
-    fun deleteCache(base:String, target: String) : List<RateEntity>
+    suspend fun deleteCache(base:String, target: String)
 
     @Transaction
     suspend fun refreshCache(base:String, target: String, newData: List<RateEntity>){
