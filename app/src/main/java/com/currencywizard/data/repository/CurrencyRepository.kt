@@ -29,6 +29,8 @@ interface CurrencyRepository {
         from: String,
         to: String
     ): DataState<List<Rate>>
+
+    suspend fun getTransferHistory(): DataState<List<Rate>>
 }
 
 class CurrencyRepositoryImpl @Inject constructor(
@@ -132,6 +134,25 @@ class CurrencyRepositoryImpl @Inject constructor(
                 }
             )
         }
+    }
+
+    override suspend fun getTransferHistory(): DataState<List<Rate>> {
+        kotlin.runCatching {
+            dao.getTransferHistory()
+        }.fold(
+            onSuccess = {
+                return if(it.isNotEmpty()){
+                    val result = it.map { rateEntity ->
+                        rateEntity.toRate()
+                    }
+                    DataState.Success(result)
+                }
+                else return DataState.Failure("Rates is empty")
+            },
+            onFailure = {
+                return DataState.Failure(it.message ?: "Unknown error")
+            }
+        )
     }
 
     private fun orderByDate(rates: List<Rate>): List<Rate> {
