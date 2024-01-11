@@ -94,8 +94,12 @@ class HistoryRelationFragment : Fragment(R.layout.fragment_history_relation) {
                     dataSet.setDrawValues(false)
 
                     // fill
+                    // green-red
+//                    val startColor = Color.GREEN
+//                    val endColor = Color.RED
+                    // orange-transparent
                     val startColor = Color.parseColor("#FF5722")
-                    val endColor = Color.TRANSPARENT
+                    val endColor =  Color.TRANSPARENT
                     val gradientDrawable = GradientDrawable(
                         GradientDrawable.Orientation.TOP_BOTTOM,
                         intArrayOf(startColor, endColor)
