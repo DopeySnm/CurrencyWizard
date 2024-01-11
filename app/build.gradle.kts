@@ -77,17 +77,9 @@ dependencies {
     ksp("androidx.room:room-compiler:$roomVersion")
 
 
-    //
+    // AndroidCharts
     implementation("im.dacer:AndroidCharts:1.0.4")
 
-    // vico
-    implementation("com.patrykandpatrick.vico:compose:1.13.1")
-    // For `compose`. Creates a `ChartStyle` based on an M2 Material Theme.
-    implementation("com.patrykandpatrick.vico:compose-m2:1.13.1")
-    // For `compose`. Creates a `ChartStyle` based on an M3 Material Theme.
-    implementation("com.patrykandpatrick.vico:compose-m3:1.13.1")
-    // Houses the core logic for charts and other elements. Included in all other modules.
-    implementation("com.patrykandpatrick.vico:core:1.13.1")
-    // For the view system.
-    implementation("com.patrykandpatrick.vico:views:1.13.1")
+    // MPAndroidChart
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }
