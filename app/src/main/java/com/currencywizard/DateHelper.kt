@@ -1,7 +1,10 @@
 package com.currencywizard
 
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
+import java.util.Date
 
 enum class PeriodsTime(val value: Int, val period: Int) {
     OVER_FIVE_YEARS(-5, Calendar.YEAR),
@@ -28,4 +31,5 @@ class DateHelper {
         }
     }
 
+    val dateFormatter = SimpleDateFormat("MM-dd-yyyy")
 }

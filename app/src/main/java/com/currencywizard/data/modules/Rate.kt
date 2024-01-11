@@ -1,5 +1,6 @@
 package com.currencywizard.data.modules
 
+import com.currencywizard.data.db.RateSource
 import com.currencywizard.data.db.models.RateEntity
 import java.util.Date
 
@@ -11,8 +12,8 @@ data class Rate(
     val date: String,
     val coefficient: Double
 ) {
-    fun toRateEntity(): RateEntity =
+    fun toRateEntity(source: RateSource): RateEntity =
         RateEntity(
-            id, base, target, date, coefficient
+            id, base, target, date, coefficient, source
         )
 }
