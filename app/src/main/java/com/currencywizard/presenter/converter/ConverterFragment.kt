@@ -121,12 +121,17 @@ class ConverterFragment  : Fragment(R.layout.fragment_converter) {
         }
     }
     private fun onHistoryClick(){
-
+        if (binding.baseCurrencyDropdown.text.toString() != "" &&
+            binding.targetCurrencyDropdown.text.toString() != ""
+        ) {
+            val action = ConverterFragmentDirections.actionConverterFragmentToTransferHistoryFragment()
+            Navigation.findNavController(requireView()).navigate(action)
+        }
     }
     private fun onSwitchClick(){
-
-
-
+        viewModel.resetBase()
+        viewModel.resetTarget()
+        binding.baseCurrencyDropdown.setText(binding.targetCurrencyDropdown.text, false)
+        binding.targetCurrencyDropdown.setText(binding.baseCurrencyDropdown.text, false)
     }
-
 }
