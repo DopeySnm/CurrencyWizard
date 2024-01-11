@@ -7,9 +7,13 @@ import androidx.lifecycle.viewModelScope
 
 import com.currencywizard.data.modules.Rate
 import com.currencywizard.data.states.UiState
+import com.currencywizard.domain.GetTransferHistoryUseCase
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TransferHistoryViewModel : ViewModel() {
+class TransferHistoryViewModel @Inject constructor(
+    val getTransferHistoryUseCase: GetTransferHistoryUseCase
+) : ViewModel() {
 
     private val _rates = MutableLiveData<UiState<List<Rate>>>(UiState.Loading)
     val rates : LiveData<UiState<List<Rate>>>
@@ -18,8 +22,8 @@ class TransferHistoryViewModel : ViewModel() {
     fun loadRates() {
         _rates.postValue(UiState.Loading)
         viewModelScope.launch {
-           /* val result = convertCurrencyUseCase(_baseValue.value!!, currencyForm, currencyTo)
-            _rates.postValue(UiState.fromDataState(result))*/
+           val result = getTransferHistoryUseCase()
+            _rates.postValue(UiState.fromDataState(result))
         }
     }
 }
