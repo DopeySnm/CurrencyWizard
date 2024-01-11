@@ -16,6 +16,8 @@ import com.currencywizard.domain.GetCurrencyHistoryRelationOverThreeMonthsUseCas
 import com.currencywizard.domain.GetCurrencyHistoryRelationOverThreeMonthsUseCaseImpl
 import com.currencywizard.domain.GetCurrencyHistoryRelationOverThreeYearsUseCase
 import com.currencywizard.domain.GetCurrencyHistoryRelationOverThreeYearsUseCaseImpl
+import com.currencywizard.domain.GetTransferHistoryUseCase
+import com.currencywizard.domain.GetTransferHistoryUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -24,17 +26,25 @@ import dagger.Provides
 interface AppBindsModule {
 
     @Binds
+    fun bindGetTransferHistoryUseCase(
+        useCase: GetTransferHistoryUseCaseImpl
+    ): GetTransferHistoryUseCase
+
+    @Binds
     fun bindGetCurrencyHistoryRelationOverThreeYearsUseCase(
         useCase: GetCurrencyHistoryRelationOverThreeYearsUseCaseImpl
     ): GetCurrencyHistoryRelationOverThreeYearsUseCase
+
     @Binds
     fun bindGetCurrencyHistoryRelationOverThreeMonthsUseCase(
         useCase: GetCurrencyHistoryRelationOverThreeMonthsUseCaseImpl
     ): GetCurrencyHistoryRelationOverThreeMonthsUseCase
+
     @Binds
     fun bindGetCurrencyHistoryRelationOverOneYearsUseCase(
         useCase: GetCurrencyHistoryRelationOverOneYearsUseCaseImpl
     ): GetCurrencyHistoryRelationOverOneYearsUseCase
+
     @Binds
     fun bindGetCurrencyHistoryRelationOverFiveYearsUseCase(
         useCase: GetCurrencyHistoryRelationOverFiveYearsUseCaseImpl
