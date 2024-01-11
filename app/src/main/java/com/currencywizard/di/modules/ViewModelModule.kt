@@ -6,6 +6,7 @@ import com.currencywizard.di.viewModel.ViewModelFactory
 import com.currencywizard.di.viewModel.ViewModelKey
 import com.currencywizard.presenter.converter.ConverterViewModel
 import com.currencywizard.presenter.historyRelation.HistoryRelationViewModel
+import com.currencywizard.presenter.transferHistory.TransferHistoryViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -26,4 +27,8 @@ abstract class ViewModelModule {
     @ViewModelKey(HistoryRelationViewModel::class)
     abstract fun bindHistoryRelationViewModel(viewModel: HistoryRelationViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(TransferHistoryViewModel::class)
+    abstract fun bindTransferHistoryViewModel(viewModel: TransferHistoryViewModel): ViewModel
 }
