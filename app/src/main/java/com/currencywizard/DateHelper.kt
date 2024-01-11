@@ -29,6 +29,11 @@ class DateHelper {
             val time = calendar.time
             return formatter.format(time)
         }
+
+        fun dateToFloat(dateFormat: SimpleDateFormat, dateString: String): Float {
+            val date = dateFormat.parse(dateString)
+            return date?.time?.toFloat() ?: 0f
+        }
     }
 
     val dateFormatter = SimpleDateFormat("MM-dd-yyyy")
