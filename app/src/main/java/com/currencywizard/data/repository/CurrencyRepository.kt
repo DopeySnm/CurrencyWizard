@@ -54,7 +54,8 @@ class CurrencyRepositoryImpl @Inject constructor(
                             base = currencyForm,
                             target = currencyTo,
                             date = currencyRelations.date,
-                            coefficient = currencyRelations.rates[currencyTo]!!
+                            result = currencyRelations.rates[currencyTo]!!,
+                            amount = amount
                         )
                         dao.saveRate(rate.toRateEntity(RateSource.TRANSFER))
                         DataState.Success(rate)
@@ -119,9 +120,9 @@ class CurrencyRepositoryImpl @Inject constructor(
                                     base = historyCurrencyRelations.base,
                                     target = ratePair[0].first,
                                     date = rates.key,
-                                    coefficient = ratePair[0].second
+                                    result = ratePair[0].second,
+                                    amount = historyCurrencyRelations.amount
                                 )
-                                //listRateEntity.add(rate.toRateEntity())
                                 rate
                             }
                             dao.refreshCache(from, to, listRate.map {rate -> rate.toRateEntity(RateSource.HISTORY) })

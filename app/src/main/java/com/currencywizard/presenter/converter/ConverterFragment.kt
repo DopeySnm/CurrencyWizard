@@ -86,7 +86,7 @@ class ConverterFragment  : Fragment(R.layout.fragment_converter) {
     private fun initializeTarget(state: UiState<Rate>){
         when(state){
             is UiState.Success -> binding.targetCurrencyTextView.text = (
-                    ((state.value.coefficient * 100.0).roundToLong()) / 100.0)
+                    ((state.value.result * 100.0).roundToLong()) / 100.0)
                 .toString()
             is UiState.Failure -> binding.targetCurrencyTextView.text = "failed"
             is UiState.Loading -> binding.targetCurrencyTextView.text = "0"

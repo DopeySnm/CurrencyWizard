@@ -1,7 +1,7 @@
 package com.currencywizard.data.api.models
 
 data class HistoryCurrencyRelationsResponse(
-    val amount: Int,
+    val amount: Double,
     val base: String,
     val start_date: String,
     val end_date: String,

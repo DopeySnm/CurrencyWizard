@@ -1,5 +1,6 @@
 package com.currencywizard.data.db.models
 
+import android.icu.util.CurrencyAmount
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
@@ -17,11 +18,12 @@ data class RateEntity(
     val base: String,
     val target: String,
     val date: String,
-    val coefficient: Double,
+    val result: Double,
+    val amount: Double,
     val source: RateSource = RateSource.TRANSFER
 ) {
     fun toRate(): Rate =
         Rate(
-            id, base, target, date, coefficient
+            id, base, target, date, result, amount
         )
 }

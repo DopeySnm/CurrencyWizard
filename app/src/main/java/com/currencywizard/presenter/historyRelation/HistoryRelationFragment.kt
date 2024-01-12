@@ -82,7 +82,7 @@ class HistoryRelationFragment : Fragment(R.layout.fragment_history_relation) {
                     val entries = it.value.map {
                         Entry(
                             DateHelper.dateToFloat(dateFormat, it.date),
-                            it.coefficient.toFloat()
+                            it.result.toFloat()
                         )
                     }
 
