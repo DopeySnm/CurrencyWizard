@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_converterFragment_to_historyRelationFragment"
             app:destination="@id/historyRelationFragment" />
+        <action
+            android:id="@+id/action_converterFragment_to_transferHistoryFragment"
+            app:destination="@id/transferHistoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/historyRelationFragment"
@@ -26,4 +29,9 @@
             android:name="to"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/transferHistoryFragment"
+        android:name="com.currencywizard.presenter.transferHistory.TransferHistoryFragment"
+        android:label="fragment_transfer_history"
+        tools:layout="@layout/fragment_transfer_history" />
 </navigation>

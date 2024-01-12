@@ -2,13 +2,10 @@ package com.currencywizard.presenter.historyRelation
 
 import android.content.Context
 import android.graphics.Color
-import android.graphics.LinearGradient
-import android.graphics.Paint
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -42,8 +39,6 @@ class HistoryRelationFragment : Fragment(R.layout.fragment_history_relation) {
     lateinit var viewModelFactory: ViewModelFactory
 
     private val viewModel: HistoryRelationViewModel by viewModels { viewModelFactory }
-
-    private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
     private var textRelation = ""
 
@@ -79,10 +74,10 @@ class HistoryRelationFragment : Fragment(R.layout.fragment_history_relation) {
         viewModel.ratesLiveData.observe(viewLifecycleOwner) {
             when(it){
                 is UiState.Success -> {
-                    val entries = it.value.map {
+                    val entries = it.value.map {rate ->
                         Entry(
-                            DateHelper.dateToFloat(dateFormat, it.date),
-                            it.result.toFloat()
+                            DateHelper.dateToFloat(DateHelper.formatter, rate.date),
+                            rate.result.toFloat()
                         )
                     }
 
@@ -140,7 +135,7 @@ class HistoryRelationFragment : Fragment(R.layout.fragment_history_relation) {
         // customizing xAxis to date
         xAxis.valueFormatter = object : ValueFormatter() {
             override fun getAxisLabel(value: Float, axis: AxisBase?): String {
-                return dateFormat.format(Date(value.toLong()))
+                return DateHelper.formatter.format(Date(value.toLong()))
             }
         }
 
@@ -152,7 +147,7 @@ class HistoryRelationFragment : Fragment(R.layout.fragment_history_relation) {
             override fun onValueSelected(e: Entry?, h: Highlight?) {
                 Toast.makeText(
                     binding.root.context,
-                    "Selected Value: ${e?.y} ${dateFormat.format(Date(e?.x!!.toLong()))}",
+                    "Selected Value: ${e?.y} ${DateHelper.formatter.format(Date(e?.x!!.toLong()))}",
                     Toast.LENGTH_SHORT
                 ).show()
             }

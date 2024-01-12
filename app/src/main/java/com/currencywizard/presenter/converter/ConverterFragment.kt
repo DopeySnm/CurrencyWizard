@@ -121,12 +121,16 @@ class ConverterFragment  : Fragment(R.layout.fragment_converter) {
         }
     }
     private fun onHistoryClick(){
-
+        val action = ConverterFragmentDirections.actionConverterFragmentToTransferHistoryFragment()
+        Navigation.findNavController(requireView()).navigate(action)
     }
     private fun onSwitchClick(){
-
-
+        val baseText = binding.baseCurrencyDropdown.text
+        val targetText = binding.targetCurrencyDropdown.text
+        viewModel.resetBase()
+        viewModel.resetTarget()
+        binding.targetCurrencyDropdown.setText(baseText, false)
+        binding.baseCurrencyDropdown.setText(targetText, false)
 
     }
-
 }
