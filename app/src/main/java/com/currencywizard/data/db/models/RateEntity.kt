@@ -1,6 +1,5 @@
 package com.currencywizard.data.db.models
 
-import android.icu.util.CurrencyAmount
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters

@@ -42,6 +42,8 @@ class HistoryRelationFragment : Fragment(R.layout.fragment_history_relation) {
 
     private var textRelation = ""
 
+    private var currentToast: Toast? = null
+
     override fun onAttach(context: Context) {
         context.appComponent.inject(this)
         super.onAttach(context)
@@ -50,12 +52,10 @@ class HistoryRelationFragment : Fragment(R.layout.fragment_history_relation) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        textRelation = "History relations ${arguments?.getString("from").toString()}" +
-                " and ${arguments?.getString("to").toString()} "
+        textRelation = "History relations from ${arguments?.getString("from").toString()}" +
+                " to ${arguments?.getString("to").toString()} "
 
         initializeLineChart()
-
-        initializeLineView()
 
         initializeButton()
 
@@ -114,8 +114,6 @@ class HistoryRelationFragment : Fragment(R.layout.fragment_history_relation) {
             }
         }
 
-
-
         val xAxis: XAxis = lineChart.xAxis
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         xAxis.textColor = textColor
@@ -139,17 +137,25 @@ class HistoryRelationFragment : Fragment(R.layout.fragment_history_relation) {
             }
         }
 
-        xAxis.setLabelCount(5, true)
+//        xAxis.setLabelCount(6, true)
 
-        xAxis.granularity = 0.5f
+        xAxis.labelRotationAngle = -15f
+        xAxis.labelCount = 5
+
+        xAxis.setCenterAxisLabels(true)
 
         lineChart.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
+
             override fun onValueSelected(e: Entry?, h: Highlight?) {
-                Toast.makeText(
+                currentToast?.cancel()
+
+                currentToast = Toast.makeText(
                     binding.root.context,
                     "Selected Value: ${e?.y} ${DateHelper.formatter.format(Date(e?.x!!.toLong()))}",
                     Toast.LENGTH_SHORT
-                ).show()
+                )
+
+                currentToast?.show()
             }
             override fun onNothingSelected() {}
         })
