@@ -16,4 +16,5 @@
     <string name="_0">0</string>
     <string name="equal">=</string>
     <string name="clear">C</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>
